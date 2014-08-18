@@ -1,0 +1,37 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.0.3'
+  }
+}
+
+apply plugin: 'scala'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+repositories {
+  mavenCentral()
+}
+
+compileScala {
+  scalaCompileOptions.useAnt = false
+  scalaCompileOptions.useCompileDaemon = true
+}
+
+configurations {
+  provided
+}
+
+sourceSets {
+  main.compileClasspath += configurations.provided
+  test.compileClasspath += configurations.provided
+  test.runtimeClasspath += configurations.provided
+}
+
+dependencies {
+  provided 'org.apache.spark:spark-core_2.10:1.0.2'
+
+  testCompile 'junit:junit:4.11'
+  testCompile 'org.scalatest:scalatest_2.10:2.2.1'
+}
