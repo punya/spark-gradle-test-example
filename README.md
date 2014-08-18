@@ -1,4 +1,4 @@
-# Spark Gradle Test Example ![Build Status](https://travis-ci.org/punya/spark-gradle-test-example.svg?branch=develop)
+# Spark Gradle Test Example [![Build Status](https://travis-ci.org/punya/spark-gradle-test-example.svg?branch=develop)](https://travis-ci.org/punya/spark-gradle-test-example)
 
 To run tests,
 
