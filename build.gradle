@@ -14,9 +14,9 @@ repositories {
   mavenCentral()
 }
 
-compileScala {
-  scalaCompileOptions.useAnt = false
-  scalaCompileOptions.useCompileDaemon = true
+tasks.withType(ScalaCompile).each {
+  it.scalaCompileOptions.useAnt = false
+  it.scalaCompileOptions.useCompileDaemon = true
 }
 
 configurations {
