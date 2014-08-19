@@ -31,6 +31,8 @@ sourceSets {
 
 dependencies {
   provided 'org.apache.spark:spark-core_2.10:1.0.2'
+  provided 'org.scala-lang:scala-compiler:2.10.4'
+  provided 'org.scala-lang:jline:2.10.4'
 
   testCompile 'junit:junit:4.11'
   testCompile 'org.scalatest:scalatest_2.10:2.2.1'
