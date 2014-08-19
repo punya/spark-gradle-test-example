@@ -12,3 +12,9 @@ To produce a shadowed jar suitable for `spark-submit`,
   ./gradlew shadowJar
 ```
 
+To start a REPL (note that this isn't `spark-shell`, so you won't be able to
+submit jobs to a remote Spark master),
+
+```
+  ./gradlew -q scalaTestConsole
+```
