@@ -5,10 +5,18 @@ plugins {
 
 repositories {
   jcenter()
+  ivy {
+    url "http://mirrors.ibiblio.org"
+    layout "pattern", {
+      artifact "[organisation]/[module]-[revision]/[module]-[revision]-[classifier].[ext]"
+      m2compatible = true
+    }
+  }
 }
 
 configurations {
   provided
+  spark
 }
 
 tasks.withType(ScalaCompile) {
@@ -26,6 +34,25 @@ dependencies {
   provided 'org.apache.spark:spark-core_2.10:1.4.0'
   provided 'org.scala-lang:jline:2.10.5'
 
+  spark(group: 'apache.spark', name: 'spark', version: '1.4.0') {
+    artifact {
+      name = 'spark'
+      type = 'tgz'
+      classifier = 'bin-hadoop2.4'
+      extension = 'tgz'
+    }
+  }
+
   testCompile 'junit:junit:4.12'
   testCompile 'org.scalatest:scalatest_2.10:2.2.5'
+}
+
+task setupSpark(type: Copy) {
+  from tarTree(configurations.spark.singleFile)
+  into "$buildDir/spark"
+}
+
+tasks.withType(Test) {
+  dependsOn setupSpark
+  environment.SPARK_HOME = setupSpark.outputs.dir.listFiles[0]
 }
