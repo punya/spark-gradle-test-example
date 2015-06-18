@@ -6,7 +6,7 @@ plugins {
 repositories {
   jcenter()
   ivy {
-    url "http://mirrors.ibiblio.org"
+    url "http://mirror.nexcess.net"
     layout "pattern", {
       artifact "[organisation]/[module]-[revision]/[module]-[revision]-[classifier].[ext]"
       m2compatible = true
