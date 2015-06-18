@@ -2,3 +2,12 @@ sudo: false
 language: java
 jdk:
   - oraclejdk8
+after_success:
+  - export CI_NAME=ci CI_BRANCH=$TRAVIS_BRANCH CI_PULL_REQUEST=$TRAVIS_PULL_REQUEST CI_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER
+cache:
+  directories:
+  - $HOME/.gradle/wrapper
+  - $HOME/.gradle/native
+  - $HOME/.gradle/caches/2.4
+  - $HOME/.gradle/caches/modules-2/files-2.1
+  - $HOME/.gradle/caches/modules-2/metadata-2.15

@@ -4,7 +4,7 @@ import org.apache.spark._
 import org.apache.spark.rdd._
 
 object AllUsers extends App {
-  val conf = new SparkConf().setAppName("All Users")
+  val conf = new SparkConf().setAppName("All Users").setMaster("local-cluster[1,2,512]")
   val spark = new SparkContext(conf)
   getUsers(spark.textFile("/etc/passwd"))
     .foreach(Console.println)
