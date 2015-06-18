@@ -47,12 +47,20 @@ dependencies {
   testCompile 'org.scalatest:scalatest_2.10:2.2.5'
 }
 
+def sparkBaseDir = new File(buildDir, 'spark')
+
+RelativePath stripParent(RelativePath p) {
+  return new RelativePath(p.endsWithFile, p.segments[1..-1] as String[])
+}
+
 task setupSpark(type: Copy) {
   from tarTree(configurations.spark.singleFile)
-  into "$buildDir/spark"
+  into sparkBaseDir
+  eachFile { it.relativePath = stripParent(it.relativePath) }
+  includeEmptyDirs false
 }
 
 tasks.withType(Test) {
   dependsOn setupSpark
-  environment.SPARK_HOME = setupSpark.outputs.dir.listFiles[0]
+  environment.SPARK_HOME = sparkBaseDir.absolutePath
 }
